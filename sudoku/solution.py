@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from sudoku import DIGITS
 from sudoku import GRAY
 from sudoku import WHITE

@@ -1,4 +1,5 @@
 TODO
 ====
+- Expand README.md
 - Unit tests
-- Port old solvers
+- Recursive solution gets stuck; speed it up!
