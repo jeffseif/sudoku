@@ -15,7 +15,7 @@ class Matrix:
     or possible configurations which assemble to a solution.
     """
 
-    def __init__(self, prompt, verbose):
+    def __init__(self, prompt, verbose=0):
         self.set_prompt(prompt)
         self.set_dimensions()
 

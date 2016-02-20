@@ -1,4 +1,3 @@
-from sudoku import DIGITS
 from sudoku import GRAY
 from sudoku import WHITE
 
@@ -14,7 +13,7 @@ class Solution:
 
     def process(self, solution):
         self.positions = {
-            link.column.name[1: ]: link.name
+            link.column.name[1:]: link.name
             for link in solution
         }
 

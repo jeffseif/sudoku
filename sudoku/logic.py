@@ -26,7 +26,7 @@ class Logic:
     def __getitem__(self, ijk):
         return self.board.__getitem__(ijk)
 
-    def __init__(self, prompt, size = None, state = None, board = None, iteration = None, verbose = 1):
+    def __init__(self, prompt, size=None, state=None, board=None, iteration=None, verbose=1):
 
         self.root, self.size, self.square = self.__size__helper(prompt)
 
@@ -126,12 +126,12 @@ class Logic:
         verbose = self.verbose - (self.verbose > 3)
 
         return Logic(
-            prompt = prompt,
-            size = self.size,
-            state = State.FIND,
-            board = board,
-            iteration = self.iteration,
-            verbose = verbose,
+            prompt=prompt,
+            size=self.size,
+            state=State.FIND,
+            board=board,
+            iteration=self.iteration,
+            verbose=verbose,
         )
 
     def devour(self, other):
@@ -179,8 +179,14 @@ class Logic:
 
                             # locked candidate
 
-                            jndexs = filter(lambda each: each != jndex, (boxdex + (jndex // root) * root for boxdex in range(root)))
-                            any(map(self.board.zeroIndirect, ((index, jndex, kndex) for jndex in jndexs for index in indexs)))
+                            jndexs = filter(
+                                lambda each: each != jndex,
+                                (boxdex + (jndex // root) * root for boxdex in range(root)),
+                            )
+                            any(map(
+                                self.board.zeroIndirect,
+                                ((index, jndex, kndex) for jndex in jndexs for index in indexs),
+                            ))
 
     def findBoxes(self):
         root = self.root
@@ -213,14 +219,20 @@ class Logic:
 
                             # locked candidate
 
-                            any(map(self.board.zeroIndirect, ((index, jndex, kndex) for jndex in self if jndex not in jndexs)))
+                            any(map(
+                                self.board.zeroIndirect,
+                                ((index, jndex, kndex) for jndex in self if jndex not in jndexs),
+                            ))
 
                     for jndex in jndexs:
                         if count == sum(self[index, jndex, kndex] for index in indexs):
 
                             # locked candidate
 
-                            any(map(self.board.zeroIndirect, ((index, jndex, kndex) for index in self if index not in indexs)))
+                            any(map(
+                                self.board.zeroIndirect,
+                                ((index, jndex, kndex) for index in self if index not in indexs),
+                            ))
 
     def findRows(self):
         root = self.root
@@ -248,8 +260,14 @@ class Logic:
 
                             # locked candidate
 
-                            indexs = filter(lambda each: each != index, (boxdex + (index // root) * root for boxdex in range(root)))
-                            any(map(self.board.zeroIndirect, ((index, jndex, kndex) for index in indexs for jndex in jndexs)))
+                            indexs = filter(
+                                lambda each: each != index,
+                                (boxdex + (index // root) * root for boxdex in range(root))
+                            )
+                            any(map(
+                                self.board.zeroIndirect,
+                                ((index, jndex, kndex) for index in indexs for jndex in jndexs),
+                            ))
 
     def findSquares(self):
         for index in self:
@@ -270,7 +288,7 @@ class Logic:
 
     def getFound(self, ij):
         for found in self.found:
-            if found[ : 2] == ij:
+            if found[: 2] == ij:
                 return found[2]
 
     def increment(self):
@@ -289,7 +307,11 @@ class Logic:
     def seeds(self):
         seeds = self.board.trues() - self.found
 
-        return sorted(seeds, key = lambda seed: (sum(self.board[seed[0], seed[1], :]), seed[2], seed[ : 2]), reverse = True)
+        return sorted(
+            seeds,
+            key=lambda seed: (sum(self.board[seed[0], seed[1], :]), seed[2], seed[: 2]),
+            reverse=True,
+        )
 
     @staticmethod
     def __seed__helper(seed):
