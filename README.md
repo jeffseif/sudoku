@@ -1,4 +1,4 @@
-# Sudoku
+# sudoku
 
 A solution for [sudoku](https://en.wikipedia.org/wiki/Sudoku).
 
