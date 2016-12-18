@@ -13,14 +13,11 @@ An older [logic-based](http://www.sudokuoftheday.com/techniques/), recursive sol
 
     > git clone git@github.com:jeffseif/sudoku.git
     > cd sudoku
-    > virtualenv venv --python=$(which python3)
-    > source venv/bin/activate
     > make
-    > make test
 
 ## Example invocation
 
-    > ./sudoku/main.py --help
+    > ./sudoku.sh --help
     usage: main.py [-h] [--version] [--verbose] [--use-old-solver] [prompt]
 
     Sudoku solver
@@ -37,7 +34,7 @@ An older [logic-based](http://www.sudokuoftheday.com/techniques/), recursive sol
 
     Version 1.0.0 | Jeffrey Seifried 2016
 
-    > ./sudoku/main.py 1....21...3....4
+    > ./sudoku.sh 1....21...3....4
     1 . | . .
     . 2 | 1 .
     ----+----

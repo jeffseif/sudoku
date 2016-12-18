@@ -1,15 +1,30 @@
-.PHONY: all install test clean
+.PHONY: all clean install test
 
 all: install
 
-install:
-	./setup.py install
+install: venv/.setup
+	@true
+
+venv/.setup: venv
+	@venv/bin/python setup.py \
+		install \
+		--quiet
+	@touch $@
+
+venv: requirements.txt
+	@virtualenv \
+		--no-site-packages \
+		--python=$(which python3) \
+		$@
+	@$@/bin/pip install \
+		--requirement $<
+	@touch $@
 
 test:
-	tox
+	@venv/bin/tox
 
 clean:
-	./setup.py clean --all
+	venv/bin/python ./setup.py clean --all
 	rm -rf *.egg-info/
 	rm -rf .cache/
 	rm -rf .eggs/
