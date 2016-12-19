@@ -24,7 +24,7 @@ test:
 	@venv/bin/tox
 
 clean:
-	venv/bin/python ./setup.py clean --all
+	venv/bin/python setup.py clean --all
 	rm -rf *.egg-info/
 	rm -rf .cache/
 	rm -rf .eggs/
