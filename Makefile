@@ -6,7 +6,7 @@ install: venv/.setup
 	@true
 
 venv/.setup: venv
-	@venv/bin/python setup.py \
+	@$</bin/python setup.py \
 		install \
 		--quiet
 	@touch $@
@@ -21,7 +21,7 @@ venv: requirements.txt
 	@touch $@
 
 test: venv
-	@venv/bin/tox
+	@$</bin/tox
 
 clean:
 	venv/bin/python setup.py clean --all
