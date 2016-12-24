@@ -20,7 +20,7 @@ venv: requirements.txt
 		--requirement $<
 	@touch $@
 
-test:
+test: venv
 	@venv/bin/tox
 
 clean:
