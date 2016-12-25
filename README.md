@@ -13,7 +13,7 @@ An older [logic-based](http://www.sudokuoftheday.com/techniques/), recursive sol
 
     > git clone git@github.com:jeffseif/sudoku.git
     > cd sudoku
-    > make
+    > make test
 
 ## Example invocation
 
