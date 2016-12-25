@@ -1,9 +1,7 @@
-#! /usr/bin/env python3
 from sudoku import __author__
 from sudoku import __version__
 from sudoku import __year__
 from sudoku import DEFAULT_PUZZLE
-
 from sudoku.logic import Logic
 from sudoku.matrix import Matrix
 from sudoku.solution import Solution
