@@ -1,4 +1,5 @@
 from setuptools import setup
+
 from sudoku import __author__
 from sudoku import __email__
 from sudoku import __program__
