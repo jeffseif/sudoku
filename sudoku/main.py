@@ -17,8 +17,8 @@ def main():
     )
 
     parser = argparse.ArgumentParser(
-        description='Sudoku solver',
-        epilog='Version {}'.format(__version__author__year__)
+        description='A solution for sudoku',
+        epilog='Version {}'.format(__version__author__year__),
     )
     parser.add_argument(
         '--version',

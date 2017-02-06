@@ -20,7 +20,7 @@ An older [logic-based](http://www.sudokuoftheday.com/techniques/), recursive sol
     > ./sudoku.sh --help
     usage: main.py [-h] [--version] [--verbose] [--use-old-solver] [prompt]
 
-    Sudoku solver
+    A solution for sudoku
 
     positional arguments:
       prompt            Puzzle prompt (e.g., 4.....8.5.3..........7......2.....6..
@@ -32,7 +32,7 @@ An older [logic-based](http://www.sudokuoftheday.com/techniques/), recursive sol
       --verbose, -v     Increase verbosity level.
       --use-old-solver  Use the old logic/recursion solver.
 
-    Version 1.0.0 | Jeffrey Seifried 2016
+    Version 1.0.0 | Jeffrey Seifried 2017
 
     > ./sudoku.sh 1....21...3....4
     1 . | . .

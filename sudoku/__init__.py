@@ -3,7 +3,7 @@ __email__ = 'jeffrey.seifried@gmail.com'
 __program__ = 'sudoku'
 __url__ = 'http://github.com/jeffseif/{}'.format(__program__)
 __version__ = '1.0.0'
-__year__ = '2016'
+__year__ = '2017'
 
 
 DEFAULT_PUZZLE = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
