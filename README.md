@@ -7,42 +7,48 @@ An older [logic-based](http://www.sudokuoftheday.com/techniques/), recursive sol
 
 ## Installation
 
-    > pip install -e git+https://github.com/jeffseif/sudoku.git#egg=sudoku
+```bash
+pip install -e git+https://github.com/jeffseif/sudoku.git#egg=sudoku
+```
 
 ## Development
 
-    > git clone git@github.com:jeffseif/sudoku.git
-    > cd sudoku
-    > make test
+```bash
+git clone git@github.com:jeffseif/sudoku.git
+cd sudoku
+make test
+```
 
 ## Example invocation
 
-    > ./sudoku.sh --help
-    usage: main.py [-h] [--version] [--verbose] [--use-old-solver] [prompt]
+```bash
+./cli --help
+usage: main.py [-h] [--version] [--verbose] [--use-old-solver] [prompt]
 
-    A solution for sudoku
+A solution for sudoku
 
-    positional arguments:
-      prompt            Puzzle prompt (e.g., 4.....8.5.3..........7......2.....6..
-                        ...8.4......1.......6.3.7.5..2.....1.4......)
+positional arguments:
+  prompt            Puzzle prompt (e.g., 4.....8.5.3..........7......2.....6..
+                    ...8.4......1.......6.3.7.5..2.....1.4......)
 
-    optional arguments:
-      -h, --help        show this help message and exit
-      --version         show program's version number and exit
-      --verbose, -v     Increase verbosity level.
-      --use-old-solver  Use the old logic/recursion solver.
+optional arguments:
+  -h, --help        show this help message and exit
+  --version         show program's version number and exit
+  --verbose, -v     Increase verbosity level.
+  --use-old-solver  Use the old logic/recursion solver.
 
-    Version 1.0.0 | Jeffrey Seifried 2017
+Version 1.0.0 | Jeffrey Seifried 2017
 
-    > ./sudoku.sh 1....21...3....4
-    1 . | . .
-    . 2 | 1 .
-    ----+----
-    . . | 3 .
-    . . | . 4
-    0
-    1 3 | 4 2
-    4 2 | 1 3
-    ----+----
-    2 4 | 3 1
-    3 1 | 2 4
+./cli 1....21...3....4
+1 . | . .
+. 2 | 1 .
+----+----
+. . | 3 .
+. . | . 4
+0
+1 3 | 4 2
+4 2 | 1 3
+----+----
+2 4 | 3 1
+3 1 | 2 4
+```
