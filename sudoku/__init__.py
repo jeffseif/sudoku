@@ -16,26 +16,3 @@ PROMPT_TRANSLATOR = {
     )
     for char in chars
 }
-
-
-def Colorize(color, weight=1):
-    """Function for bash-style color formatting."""
-    def inner(value):
-        return template.format(value)
-
-    template = '\033[{:d};{:d}m{{:s}}\033[0m'.format(weight, color)
-    return inner
-RED = Colorize(31)
-GREEN = Colorize(32)
-YELLOW = Colorize(33)
-BLUE = Colorize(34)
-PURPLE = Colorize(35)
-WHITE = Colorize(37)
-GRAY = Colorize(90)
-DARK_RED = Colorize(31, 0)
-DARK_GREEN = Colorize(32, 0)
-DARK_YELLOW = Colorize(33, 0)
-DARK_BLUE = Colorize(34, 0)
-DARK_PURPLE = Colorize(35, 0)
-DARK_WHITE = Colorize(37, 0)
-DARK_GRAY = Colorize(90, 0)

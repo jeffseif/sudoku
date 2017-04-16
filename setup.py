@@ -10,6 +10,9 @@ from sudoku import __version__
 setup(
     author=__author__,
     author_email=__email__,
+    dependency_links=[
+        'https://github.com/jeffseif/colors.git#egg=colors',
+    ],
     install_requires=[],
     name=__program__,
     packages=[__program__],

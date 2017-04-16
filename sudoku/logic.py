@@ -1,10 +1,11 @@
 from enum import Enum
 
+from colors import BLUE
+from colors import GREEN
+from colors import RED
+from colors import YELLOW
+
 from sudoku import DIGITS
-from sudoku import BLUE
-from sudoku import GREEN
-from sudoku import RED
-from sudoku import YELLOW
 from sudoku.bitBoard import BitBoard
 
 

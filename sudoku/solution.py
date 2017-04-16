@@ -1,5 +1,5 @@
-from sudoku import GRAY
-from sudoku import WHITE
+from colors import GRAY
+from colors import WHITE
 
 
 class Solution:
