@@ -4,8 +4,10 @@ class BitBoard:
 
     def __init__(self, size, bits=None, default=True):
         self.size = size
-        self.root = int(self.size ** 0.5)
-        self.bits = (bits is not None and bits) or [[[default for each in self] for each in self] for each in self]
+        self.root = int(self.size**0.5)
+        self.bits = (bits is not None and bits) or [
+            [[default for each in self] for each in self] for each in self
+        ]
 
     def __getitem__(self, ijk):
 
@@ -26,10 +28,18 @@ class BitBoard:
         return iter(range(self.size))
 
     def __len__(self):
-        return sum(self.bits[index][jndex][kndex] for index in self for jndex in self for kndex in self)
+        return sum(
+            self.bits[index][jndex][kndex]
+            for index in self
+            for jndex in self
+            for kndex in self
+        )
 
     def copy(self):
-        return BitBoard(self.size, list(list(list(col) for col in row) for row in self.bits))
+        return BitBoard(
+            self.size,
+            list(list(list(col) for col in row) for row in self.bits),
+        )
 
     def trues(self):
         return {
@@ -49,7 +59,9 @@ class BitBoard:
             self.bits[xndex][jndex][kndex] = False
             self.bits[index][xndex][kndex] = False
             self.bits[index][jndex][xndex] = False
-            self.bits[xndex // root + root * (index // root)][xndex % root + root * (jndex // root)][kndex] = False
+            self.bits[xndex // root + root * (index // root)][
+                xndex % root + root * (jndex // root)
+            ][kndex] = False
 
         self.bits[index][jndex][kndex] = True
 

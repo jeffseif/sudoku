@@ -5,12 +5,6 @@ A solution for [sudoku](https://en.wikipedia.org/wiki/Sudoku).
 Casting the puzzle as a [set cover problem](https://en.wikipedia.org/wiki/Set_cover_problem), it is solved using [the DLX algorithm](http://arxiv.org/abs/cs/0011047v1).
 An older [logic-based](http://www.sudokuoftheday.com/techniques/), recursive solution engine is also provided.
 
-## Installation
-
-```bash
-pip install -e git+https://github.com/jeffseif/sudoku.git#egg=sudoku
-```
-
 ## Development
 
 ```bash
@@ -23,7 +17,7 @@ make test
 
 ```bash
 ./cli --help
-usage: main.py [-h] [--version] [--verbose] [--use-old-solver] [prompt]
+usage: __main__.py [-h] [--version] [--verbose] [--use-old-solver] [prompt]
 
 A solution for sudoku
 

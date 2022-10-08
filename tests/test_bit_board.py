@@ -1,11 +1,11 @@
 import random
+
 import pytest
 
 from sudoku.bitBoard import BitBoard
 
 
 class TestBitBoard:
-
     @pytest.fixture
     def size(self):
         return 9
@@ -16,7 +16,9 @@ class TestBitBoard:
 
     @pytest.fixture
     def bit_false(self, iterator):
-        return [[[False for each in iterator] for each in iterator] for each in iterator]
+        return [
+            [[False for each in iterator] for each in iterator] for each in iterator
+        ]
 
     @pytest.fixture
     def bit_true(self, iterator):
@@ -24,7 +26,10 @@ class TestBitBoard:
 
     @pytest.fixture
     def bit_random(self, iterator):
-        return [[[random.choice((True, False)) for each in iterator] for each in iterator] for each in iterator]
+        return [
+            [[random.choice((True, False)) for each in iterator] for each in iterator]
+            for each in iterator
+        ]
 
     def test_bit_board_init(self, size, bit_true):
         bitBoard = BitBoard(size)

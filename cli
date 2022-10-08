@@ -2,4 +2,4 @@
 
 MODULE=$(basename $(pwd)) ;
 
-make && ./venv/bin/python -m "${MODULE}.main" "$@" ;
+make --quiet && ./venv/bin/python -m "${MODULE}" "$@" ;

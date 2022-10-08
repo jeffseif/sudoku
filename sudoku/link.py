@@ -1,8 +1,8 @@
 FLIP = {
-    'left': 'right',
-    'right': 'left',
-    'up': 'down',
-    'down': 'up',
+    "left": "right",
+    "right": "left",
+    "up": "down",
+    "down": "up",
 }
 
 
@@ -12,16 +12,16 @@ class Link:
     and a name (for pretty printing)."""
 
     __slots__ = [
-        'left',
-        'right',
-        'up',
-        'down',
-        'column',
-        'size',
-        'name',
+        "left",
+        "right",
+        "up",
+        "down",
+        "column",
+        "size",
+        "name",
     ]
 
-    def __init__(self, column=None, name=''):
+    def __init__(self, column=None, name=""):
         self.column = column
         self.name = name
 
@@ -29,7 +29,7 @@ class Link:
         self.left = self.right = self.up = self.down = None
 
     def __str__(self):
-        return ''.join(map(str, self.name))
+        return "".join(map(str, self.name))
 
     def loop(self, direction, include=False):
         """Traverse doubly-linked-list Links in a loop of a certain direction."""
@@ -59,8 +59,8 @@ class Link:
         self.left.right = self.right
         self.right.left = self.left
 
-        for row in self.loop('down'):
-            for link in row.loop('right'):
+        for row in self.loop("down"):
+            for link in row.loop("right"):
                 link.down.up = link.up
                 link.up.down = link.down
                 link.column.size -= 1
@@ -69,8 +69,8 @@ class Link:
         """The reverse of cover.  In the set cover problem sense: consider the
         column-type Link as not being covered and thus add it to the Matrix of
         Links which remain to be covered."""
-        for row in self.loop('up'):
-            for link in row.loop('left'):
+        for row in self.loop("up"):
+            for link in row.loop("left"):
                 link.column.size += 1
                 link.down.up = link
                 link.up.down = link

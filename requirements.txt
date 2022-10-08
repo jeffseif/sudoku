@@ -1,3 +1,0 @@
--e git://github.com/jeffseif/colors.git#egg=colors
-setuptools
-tox

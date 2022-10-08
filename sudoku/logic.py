@@ -11,7 +11,7 @@ from sudoku.bitBoard import BitBoard
 
 class NoSolutionError(Exception):
     def __str__(self):
-        return 'No solution exists'
+        return "No solution exists"
 
 
 class State(Enum):
@@ -23,11 +23,18 @@ class State(Enum):
 
 
 class Logic:
-
     def __getitem__(self, ijk):
         return self.board.__getitem__(ijk)
 
-    def __init__(self, prompt, size=None, state=None, board=None, iteration=None, verbose=1):
+    def __init__(
+        self,
+        prompt,
+        size=None,
+        state=None,
+        board=None,
+        iteration=None,
+        verbose=1,
+    ):
 
         self.root, self.size, self.square = self.__size__helper(prompt)
 
@@ -46,7 +53,7 @@ class Logic:
 
     def __prompt__helper(self, prompt, size, iteration):
 
-        offset = not(bool(iteration))
+        offset = not (bool(iteration))
 
         for position, ijk in enumerate(prompt):
 
@@ -71,47 +78,53 @@ class Logic:
         root = (index + 1) ** 0.5
         root = int(root) + bool(root % 1)
 
-        return root, root ** 2, root ** 4
+        return root, root**2, root**4
 
     def __str__(self):
-        return '\n'.join(self.__str__helper__())
+        return "\n".join(self.__str__helper__())
 
     def __str__helper__(self):
         root = self.root
-        line = GREEN('+'.join('-' * (root * 2 + (box not in (0, root - 1))) for box in range(root)))
+        line = GREEN(
+            "+".join(
+                "-" * (root * 2 + (box not in (0, root - 1))) for box in range(root)
+            ),
+        )
 
         if self.state in (State.ZERO, State.FIND):
-            status = 'LOGIC'
+            status = "LOGIC"
         elif self.state == State.STOP:
-            status = 'FAIL'
+            status = "FAIL"
         else:
             status = self.state.name
 
         remaining = self.square - len(self.found)
 
         width = max(0, (self.size + self.root - 1) * 2 - 1 - 4)
-        header = ''.join((
-            BLUE('{:>2d}'.format(self.iteration)),
-            YELLOW(('{:^' + str(width) + 's}').format(status)),
-            RED('{:>2d}'.format(remaining)),
-        ))
+        header = "".join(
+            (
+                BLUE("{:>2d}".format(self.iteration)),
+                YELLOW(("{:^" + str(width) + "s}").format(status)),
+                RED("{:>2d}".format(remaining)),
+            ),
+        )
         yield header
 
         for index in self:
 
-            if index and not(index % self.root):
+            if index and not (index % self.root):
                 yield line
 
             row = []
             for jndex in self:
-                if not(jndex % self.root) and jndex:
-                    row.append(GREEN('|'))
+                if not (jndex % self.root) and jndex:
+                    row.append(GREEN("|"))
 
                 kndex = self.getFound((index, jndex))
 
-                row.append(str(kndex is not None and DIGITS[kndex] or '.'))
+                row.append(str(kndex is not None and DIGITS[kndex] or "."))
 
-            yield ' '.join(row)
+            yield " ".join(row)
 
     def __repr__(self):
         return str(self)
@@ -136,23 +149,19 @@ class Logic:
         )
 
     def devour(self, other):
-        for attr in ('board', 'found', 'iteration', 'state'):
+        for attr in ("board", "found", "iteration", "state"):
             setattr(self, attr, getattr(other, attr))
         return self
 
     def find(self):
 
-        for ijk in self.findRows():
-            yield ijk
+        yield from self.findRows()
 
-        for ijk in self.findColumns():
-            yield ijk
+        yield from self.findColumns()
 
-        for ijk in self.findBoxes():
-            yield ijk
+        yield from self.findBoxes()
 
-        for ijk in self.findSquares():
-            yield ijk
+        yield from self.findSquares()
 
     def findColumns(self):
         root = self.root
@@ -175,19 +184,31 @@ class Logic:
 
                 elif count < root:
 
-                    for indexs in (range((boxdex) * root, (boxdex + 1) * root) for boxdex in range(root)):
+                    for indexs in (
+                        range((boxdex) * root, (boxdex + 1) * root)
+                        for boxdex in range(root)
+                    ):
                         if count == sum(numbers[index] for index in indexs):
 
                             # locked candidate
 
                             jndexs = filter(
                                 lambda each: each != jndex,
-                                (boxdex + (jndex // root) * root for boxdex in range(root)),
+                                (
+                                    boxdex + (jndex // root) * root
+                                    for boxdex in range(root)
+                                ),
                             )
-                            any(map(
-                                self.board.zeroIndirect,
-                                ((index, jndex, kndex) for jndex in jndexs for index in indexs),
-                            ))
+                            any(
+                                map(
+                                    self.board.zeroIndirect,
+                                    (
+                                        (index, jndex, kndex)
+                                        for jndex in jndexs
+                                        for index in indexs
+                                    ),
+                                ),
+                            )
 
     def findBoxes(self):
         root = self.root
@@ -197,7 +218,9 @@ class Logic:
                 indexs = [index + root * (boxdex // root) for index in range(root)]
                 jndexs = [jndex + root * (boxdex % root) for jndex in range(root)]
 
-                numbers = [self[index, jndex, kndex] for index in indexs for jndex in jndexs]
+                numbers = [
+                    self[index, jndex, kndex] for index in indexs for jndex in jndexs
+                ]
                 count = sum(numbers)
 
                 if count == 0:
@@ -208,7 +231,10 @@ class Logic:
                     # unique candidate
 
                     lndex = numbers.index(True)
-                    index, jndex = boxdex // root * root + lndex // root, boxdex % root * root + lndex % root
+                    index, jndex = (
+                        boxdex // root * root + lndex // root,
+                        boxdex % root * root + lndex % root,
+                    )
                     yield (index, jndex, kndex)
 
                 elif count < root:
@@ -220,20 +246,32 @@ class Logic:
 
                             # locked candidate
 
-                            any(map(
-                                self.board.zeroIndirect,
-                                ((index, jndex, kndex) for jndex in self if jndex not in jndexs),
-                            ))
+                            any(
+                                map(
+                                    self.board.zeroIndirect,
+                                    (
+                                        (index, jndex, kndex)
+                                        for jndex in self
+                                        if jndex not in jndexs
+                                    ),
+                                ),
+                            )
 
                     for jndex in jndexs:
                         if count == sum(self[index, jndex, kndex] for index in indexs):
 
                             # locked candidate
 
-                            any(map(
-                                self.board.zeroIndirect,
-                                ((index, jndex, kndex) for index in self if index not in indexs),
-                            ))
+                            any(
+                                map(
+                                    self.board.zeroIndirect,
+                                    (
+                                        (index, jndex, kndex)
+                                        for index in self
+                                        if index not in indexs
+                                    ),
+                                ),
+                            )
 
     def findRows(self):
         root = self.root
@@ -256,19 +294,31 @@ class Logic:
 
                 elif count < root:
 
-                    for jndexs in (range((boxdex) * root, (boxdex + 1) * root) for boxdex in range(root)):
+                    for jndexs in (
+                        range((boxdex) * root, (boxdex + 1) * root)
+                        for boxdex in range(root)
+                    ):
                         if count == sum(numbers[jndex] for jndex in jndexs):
 
                             # locked candidate
 
                             indexs = filter(
                                 lambda each: each != index,
-                                (boxdex + (index // root) * root for boxdex in range(root))
+                                (
+                                    boxdex + (index // root) * root
+                                    for boxdex in range(root)
+                                ),
                             )
-                            any(map(
-                                self.board.zeroIndirect,
-                                ((index, jndex, kndex) for index in indexs for jndex in jndexs),
-                            ))
+                            any(
+                                map(
+                                    self.board.zeroIndirect,
+                                    (
+                                        (index, jndex, kndex)
+                                        for index in indexs
+                                        for jndex in jndexs
+                                    ),
+                                ),
+                            )
 
     def findSquares(self):
         for index in self:
@@ -289,34 +339,34 @@ class Logic:
 
     def getFound(self, ij):
         for found in self.found:
-            if found[: 2] == ij:
+            if found[:2] == ij:
                 return found[2]
 
     def increment(self):
         self.iteration += 1
 
     def kSlice(self, kndex):
-        return '\n'.join(self.__kSlice__helper(kndex))
+        return "\n".join(self.__kSlice__helper(kndex))
 
     def __kSlice__helper(self, kndex):
 
-        yield 'k = {}'.format(kndex + 1)
+        yield "k = {}".format(kndex + 1)
 
         for index in self:
-            yield ''.join(str(int(self.board[index, jndex, kndex])) for jndex in self)
+            yield "".join(str(int(self.board[index, jndex, kndex])) for jndex in self)
 
     def seeds(self):
         seeds = self.board.trues() - self.found
 
         return sorted(
             seeds,
-            key=lambda seed: (sum(self.board[seed[0], seed[1], :]), seed[2], seed[: 2]),
+            key=lambda seed: (sum(self.board[seed[0], seed[1], :]), seed[2], seed[:2]),
             reverse=True,
         )
 
     @staticmethod
     def __seed__helper(seed):
-        return '> Seeded {0[2]} @ {0[0]},{0[1]}'.format([each + 1 for each in seed])
+        return "> Seeded {0[2]} @ {0[0]},{0[1]}".format([each + 1 for each in seed])
 
     def solve(self):
 

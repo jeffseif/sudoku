@@ -1,33 +1,34 @@
 import gzip
+
 import pytest
 
 from sudoku.logic import Logic
-from sudoku.matrix import Matrix
 from sudoku.logic import State
+from sudoku.matrix import Matrix
 
 
-DAT_DIRECTORY = './dat/'
+DAT_DIRECTORY = "./dat/"
 FILENAMES = (
     # 6 prompts
-    '4x4',
+    "4x4",
     # 50 prompts
-    'easy',
+    "easy",
     # 1 prompt
-    'extreme',
+    "extreme",
     # 11 prompts
-    'hard',
+    "hard",
     # 95 prompts
-    'medium',
+    "medium",
     # 49141 prompts (http://staffhome.ecm.uwa.edu.au/~00013890/sudokumin.php)
-    'minimum',
+    "minimum",
     # 19 prompts
-    'various',
+    "various",
 )
 PROMPTS = (
-    '1',
-    '4',
-    '9',
-    'F',
+    "1",
+    "4",
+    "9",
+    "F",
 )
 
 
@@ -49,16 +50,15 @@ CHECKERS = (
 
 
 class TestSolve:
-
-    @pytest.mark.parametrize('file_name', FILENAMES)
-    @pytest.mark.parametrize('checker', CHECKERS)
+    @pytest.mark.parametrize("file_name", FILENAMES)
+    @pytest.mark.parametrize("checker", CHECKERS)
     def test_solve_from_filename(self, file_name, checker):
-        with gzip.open('{:s}{:s}.gz'.format(DAT_DIRECTORY, file_name), 'rb') as f:
+        with gzip.open("{:s}{:s}.gz".format(DAT_DIRECTORY, file_name), "rb") as f:
             for prompt in f.readlines():
-                prompt = prompt.decode('utf-8')
+                prompt = prompt.decode("utf-8")
                 checker(prompt)
 
-    @pytest.mark.parametrize('prompt', PROMPTS)
-    @pytest.mark.parametrize('checker', CHECKERS)
+    @pytest.mark.parametrize("prompt", PROMPTS)
+    @pytest.mark.parametrize("checker", CHECKERS)
     def test_solve_from_string(self, prompt, checker):
         checker(prompt)
